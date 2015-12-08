@@ -170,6 +170,13 @@ public class Login extends Activity{
 
 
     @Override
+    public void onBackPressed() {
+        System.out.println("back was pressed");
+        finish();
+    }
+
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);

@@ -179,7 +179,6 @@ public class UserView extends AppCompatActivity
     @Override
     public void onBackPressed() {
         //Overridden to prevent user from exiting without sign out
-
     }
 
 
