@@ -175,16 +175,11 @@ public class UserView extends AppCompatActivity
 
     }
 
+
     @Override
     public void onBackPressed() {
-        if(getFragmentManager().getBackStackEntryCount() == 0) {
-            System.out.println("I am last");
-            super.onBackPressed();
-        }
-        else {
-            System.out.println("some remnants ");
-            getFragmentManager().popBackStack();
-        }
+        //Overridden to prevent user from exiting without sign out
+
     }
 
 
