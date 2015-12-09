@@ -35,10 +35,12 @@ public class ChangePassword extends Fragment {
         private Firebase ref;
         private String actual_pass;
         private ProgressDialog pd;
+        private  boolean netConnected;
 
         public Password_Match_Async(Context context){
             this.async_context = context;
             pd = new ProgressDialog(async_context);
+            netConnected = StaticUserMap.getInstance().getConnectedStatus();
         }
 
         protected void onPreExecute() {
@@ -64,9 +66,13 @@ public class ChangePassword extends Fragment {
             Handler handler = new Handler();
             handler.postDelayed(new Runnable() {
                 public void run() {
-
                     pd.dismiss();
-                    if (curr_pass.getText().toString().equals(actual_pass)){
+
+                    if(!netConnected){
+                        Toast.makeText(getActivity().getApplicationContext(), "Internet Disconnected. Try Again", Toast.LENGTH_SHORT).show();
+                    }
+
+                    else if (curr_pass.getText().toString().equals(actual_pass)){
                         String pass1 = new_pass.getText().toString();
                         String pass2 = new_pass_again.getText().toString();
 

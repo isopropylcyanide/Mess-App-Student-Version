@@ -14,6 +14,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.support.v4.widget.DrawerLayout;
 import android.os.Handler;
+import android.widget.Toast;
+
 import com.example.cyanide.messpp.R;
 import com.firebase.client.Firebase;
 
@@ -36,10 +38,12 @@ public class UserView extends AppCompatActivity
         //An async class to deal with signing user out
         private ProgressDialog pd;
         private Context context;
+        private boolean net_connected;
 
         public Sign_out_async(Context context){
             this.context = context;
             pd = new ProgressDialog(context);
+            net_connected = StaticUserMap.getInstance().getConnectedStatus();
         }
 
         @Override
@@ -59,10 +63,17 @@ public class UserView extends AppCompatActivity
             handler.postDelayed(new Runnable() {
                 public void run() {
                     pd.dismiss();
-                    Intent intent = new Intent(context, Login.class);
-                    context.startActivity(intent);
+
+                    if(!net_connected)
+                        Toast.makeText(context, "Internet Disconnected. Try Again", Toast.LENGTH_SHORT).show();
+
+                    else {
+                        Intent intent = new Intent(context, Login.class);
+                        context.startActivity(intent);
+                        finish();
+                    }
                 }
-            }, 1000);  // 1000 milliseconds
+            }, 500);  // 500 milliseconds
         }
 
         @Override

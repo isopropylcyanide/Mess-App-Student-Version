@@ -204,6 +204,7 @@ public class Login extends Activity{
             public void onDataChange(DataSnapshot dataSnapshot) {
                 boolean connected = (Boolean) dataSnapshot.getValue();
                 if (connected) {
+
                     StaticUserMap.getInstance().setConnectedStatus(true);
                     System.out.println("set connected");
                     Toast.makeText(Login.this, "Connected to Firebase", Toast.LENGTH_SHORT).show();
@@ -225,7 +226,6 @@ public class Login extends Activity{
     public void onStop() {
         System.out.println("I am in stop ");
         super.onStop();
-//        ref.getRoot().child(".info/connected").removeEventListener(mConnectedListener);
     }
 
     @Override
@@ -259,7 +259,7 @@ public class Login extends Activity{
                 System.out.println("Entered Pass: " + entered_pass);
 
                 //only if connected
-                if (StaticUserMap.getInstance().getConnectionStatus()) {
+                if (StaticUserMap.getInstance().getConnectedStatus()) {
                     //Let the main UI run independently of the async listener
                     firebase_async authTask = new firebase_async(Login.this);
                     authTask.execute(entered_user, entered_pass);
