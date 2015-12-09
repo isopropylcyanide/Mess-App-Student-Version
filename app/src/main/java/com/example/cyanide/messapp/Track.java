@@ -7,12 +7,17 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.CheckBox;
+import android.widget.TextView;
 
 import com.example.cyanide.messpp.R;
 
 public class Track extends AppCompatActivity {
 
-    int year, dayOfMonth, month;
+    private int year, dayOfMonth, month;
+    private TextView guestLabel, extrasLabel;
+    private CheckBox bfast_cb,lunch_cb,dinner_cb;
+    View current;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,11 +28,20 @@ public class Track extends AppCompatActivity {
         year = intent.getIntExtra("year", 0);
         month = intent.getIntExtra("month", 0);
         dayOfMonth = intent.getIntExtra("year", 0);
+        current = this.findViewById(android.R.id.content);
 
-        System.out.println("I have been called by: "+getCallingActivity());
+        guestLabel = (TextView)findViewById(R.id.guest_label);
+        extrasLabel = (TextView)findViewById(R.id.extras_label);
+
+        bfast_cb     = (CheckBox)findViewById(R.id.bfast_cb);
+        lunch_cb     = (CheckBox)findViewById(R.id.lunch_cb);
+        dinner_cb    = (CheckBox)findViewById(R.id.dinner_cb);
+        bfast_cb.setChecked(true);
+        lunch_cb.setChecked(true);
+        dinner_cb.setChecked(true);
+
         //Retrieve User Details at the required date.
 
-        View current = this.findViewById(android.R.id.content);
         current.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -40,14 +54,7 @@ public class Track extends AppCompatActivity {
 
     @Override
     public void onBackPressed(){
-        System.out.println("Returning Back");
-
-        //set Title: Diet Tracker app
-        Intent previous = new Intent(Track.this,UserView.class);
-
-        previous.putExtra("BACK_PRESSED_FROM",1);
-        startActivity(previous);
-
+        finish();
     }
 
 

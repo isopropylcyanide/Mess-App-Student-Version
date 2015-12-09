@@ -9,7 +9,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.FragmentManager;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.support.v4.widget.DrawerLayout;
@@ -101,7 +100,6 @@ public class UserView extends AppCompatActivity
         setContentView(R.layout.activity_user_view);
 
         Intent intent = getIntent();
-        Bundle extras = intent.getExtras();
 
         mNavigationDrawerFragment = (NavigationDrawerFragment)
                 getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
@@ -112,23 +110,6 @@ public class UserView extends AppCompatActivity
         mNavigationDrawerFragment.setUp(
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
-
-        if(extras != null){
-            System.out.println("Intent has arguments");
-
-            for (String key : extras.keySet()) {
-                Object value = extras.get(key);
-                Log.d("Hi", String.format("%s %s (%s)", key,
-                        value.toString(), value.getClass().getName()));
-            }
-
-            if (extras.containsKey("BACK_PRESSED_FROM")){
-                int old_tab = extras.getInt("BACK_PRESSED_FROM");
-                onNavigationDrawerItemSelected(old_tab);
-            }
-        }
-        else
-            System.out.println("Userview got no arguments");
     }
 
     @Override
@@ -167,12 +148,9 @@ public class UserView extends AppCompatActivity
                 break;
 
             case 4:
-                Bundle extraBundle = getIntent().getExtras();
-                ChangePassword changePassword = new ChangePassword();
-                changePassword.setArguments(extraBundle);
 
                 fragmentManager.beginTransaction()
-                        .replace(R.id.container,changePassword)
+                        .replace(R.id.container,new ChangePassword())
                         .commit();
                 mTitle = getString(R.string.title_section5);
                 break;

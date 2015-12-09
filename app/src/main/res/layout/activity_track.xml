@@ -8,7 +8,7 @@
     android:orientation="vertical"
 
 
-    android:background="#2942d0">
+    android:background="#962942d0">
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -29,17 +29,12 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Name"
-                android:id="@+id/textView4"
-                android:layout_marginLeft="190dp"
-                android:textSize="20sp"/>
+                android:text="Room No"
+                android:textSize="20sp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="70dp" />
+
         </LinearLayout>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Room No"
-            android:textSize="20sp"
-            android:layout_gravity="center" />
 
     </LinearLayout>
 
@@ -65,13 +60,13 @@
 
                 />
 
-            <RadioButton
+            <CheckBox
+                android:layout_marginLeft="48dp"
+                android:id="@+id/dinner_cb"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:enabled="false" />
 
-                android:id="@+id/radioButton"
-                android:layout_marginLeft="25dp"
-                />
         </LinearLayout>
 
         <LinearLayout
@@ -88,13 +83,13 @@
                 android:id="@+id/textView7"
                 />
 
-            <RadioButton
+            <CheckBox
+                android:layout_marginLeft="75sp"
+                android:id="@+id/lunch_cb"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:enabled="false" />
 
-                android:id="@+id/radioButton2"
-                android:layout_marginLeft="52dp"
-                />
         </LinearLayout>
 
         <LinearLayout
@@ -111,13 +106,12 @@
                 android:id="@+id/textView8"
                 />
 
-            <RadioButton
-                android:layout_marginLeft="48dp"
+            <CheckBox
+                android:layout_marginLeft="72sp"
+                android:id="@+id/bfast_cb"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-
-                android:id="@+id/radioButton3"
-                />
+                android:enabled="false" />
         </LinearLayout>
         <LinearLayout
             android:layout_width="wrap_content"
@@ -132,41 +126,36 @@
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:id="@+id/textView9"
                 />
-            <EditText
-                android:layout_width="wrap_content"
+
+            <TextView
+                android:layout_width="60sp"
                 android:layout_height="wrap_content"
-                android:inputType="numberSigned"
-                android:ems="5"
-                android:id="@+id/editText8"
-                android:layout_marginLeft="95dp"
-                android:background="@drawable/textbox_bg"
-                android:textColorHint="#cccccc"
-                android:hint="Price"
-                />
+                android:id="@+id/extras_label"
+                android:layout_marginLeft="70sp"
+                android:background="#ffffff"
+                android:layout_weight="0.54" />
         </LinearLayout>
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginTop="25dp">
+            android:layout_marginTop="25dp"
+            android:weightSum="1">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Evening Snacks"
+                android:text="Guests"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:id="@+id/textView10" />
 
-            <EditText
-                android:layout_width="wrap_content"
+            <TextView
+                android:layout_width="60sp"
                 android:layout_height="wrap_content"
-                android:hint="Price"
-                android:inputType="numberSigned"
-                android:ems="5"
-                android:id="@+id/editText6"
-                android:layout_marginLeft="18dp"
-                android:textColorHint="#cccccc"
-                android:background="@drawable/textbox_bg"/>
+                android:id="@+id/guest_label"
+                android:layout_marginLeft="65sp"
+                android:background="#ffffff"
+                android:layout_weight="0.54" />
         </LinearLayout>
 
     </LinearLayout>

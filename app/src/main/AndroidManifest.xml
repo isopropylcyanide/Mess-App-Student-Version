@@ -29,7 +29,7 @@
         <activity
             android:name="com.example.cyanide.messapp.Track"
             android:label="@string/title_activity_track"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/Theme.AppCompat.Dialog"></activity>
     </application>
 
 </manifest>
