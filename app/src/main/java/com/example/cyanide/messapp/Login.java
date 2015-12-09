@@ -23,6 +23,10 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import android.os.Handler;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Map;
 import java.util.HashMap;
 
@@ -33,13 +37,15 @@ public class Login extends Activity{
     private EditText etUserName, etPass;
     private String login_status;
     private String user_login_table;
-    private String password_child, session_child;
+    private String password_child, session_child,last_login_child;
     private String firebase_Url,database_Url;
 
     private String entered_user;
     private String entered_pass;
     private Firebase ref;
     private ValueEventListener mConnectedListener, validUserListener;
+    private long session_timeout;
+    private SimpleDateFormat format;
 
 
     private class firebase_async extends AsyncTask<String, Void, Void> {
@@ -76,7 +82,7 @@ public class Login extends Activity{
                         login_status = "0";
 
                         for (DataSnapshot ds : dataSnapshot.getChildren()) {
-                            Map<String, Object> existUser = (HashMap<String, Object>) ds.getValue();
+                            HashMap<String, Object> existUser = (HashMap<String, Object>) ds.getValue();
 
                             if (entered_user.equals(ds.getKey())) {
 
@@ -88,12 +94,21 @@ public class Login extends Activity{
                                         login_status = "-1";
 
                                         /*if difference b/w curr timestamp and stored timestamp
-                                        is greater than 15 minutes, allow log-in by setting session bit*/
+                                        is greater than session_timeout, allow log-in by setting session bit*/
 
+                                        String last_login = existUser.get(last_login_child).toString();
+                                        try {
+                                            Date last_date = format.parse(last_login);
+                                            Date curr_date = new Date();
+                                            long diff = (curr_date.getTime() - last_date.getTime())/1000;
 
+                                            if (diff >= session_timeout)
+                                                login_status = "1";
 
+                                        } catch (ParseException e) {
+                                            e.printStackTrace();
+                                        }
                                     }
-
                                     else {
                                         login_status = "1";
                                         System.out.println("Successful match");
@@ -131,7 +146,7 @@ public class Login extends Activity{
             super.onPostExecute(aVoid);
             System.out.println("After async: " + login_status);
 
-            //Show the log in progress_bar for at least 2 seconds.
+            //Show the log in progress_bar for at least a few milliseconds
             Handler handler = new Handler();
             handler.postDelayed(new Runnable() {
                 public void run() {
@@ -145,6 +160,7 @@ public class Login extends Activity{
 
                         existUser.put(session_child, "0");
                         existUser.put(password_child, actual_pass);
+                        existUser.put(last_login_child,new Date().toString());
                         updated_ref.updateChildren(existUser);
 
                         user_args.put("EXTRA_FireBase_Node_Ref", database_Url + updated_ref.getPath().toString());
@@ -197,7 +213,6 @@ public class Login extends Activity{
     @Override
     public void onStart() {
         super.onStart();
-        System.out.println("I am in start ");
         // Finally, a little indication of connection status
         mConnectedListener = ref.getRoot().child(".info/connected").addValueEventListener(new ValueEventListener() {
             @Override
@@ -224,14 +239,7 @@ public class Login extends Activity{
 
     @Override
     public void onStop() {
-        System.out.println("I am in stop ");
         super.onStop();
-    }
-
-    @Override
-    public void onBackPressed() {
-        System.out.println("back was pressed");
-        finish();
     }
 
 
@@ -244,13 +252,17 @@ public class Login extends Activity{
         etUserName = (EditText) findViewById(R.id.etUserName);
         etPass = (EditText) findViewById(R.id.etPass);
 
+
         user_login_table = "login_data";
         password_child   = "password";
         session_child    = "session_valid";
+        last_login_child = "last_login";
         database_Url     = "https://sweltering-heat-4362.firebaseio.com/";
         firebase_Url     = database_Url + user_login_table;
         entered_user     = " ";
         entered_pass     = " ";
+        session_timeout  = 15 * 60;  //15 min seconds
+        format           = new SimpleDateFormat("EEE MMM dd hh:mm:ss zzz yyyy");
 
         Firebase.setAndroidContext(this);
         ref = new Firebase(firebase_Url);
