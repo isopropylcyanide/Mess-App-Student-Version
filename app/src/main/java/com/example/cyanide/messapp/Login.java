@@ -8,8 +8,10 @@ import com.firebase.client.FirebaseError;
 import com.firebase.client.ValueEventListener;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -36,6 +38,8 @@ public class Login extends Activity{
 
     private String entered_user;
     private String entered_pass;
+    private Firebase ref;
+    private ValueEventListener mConnectedListener, validUserListener;
 
 
     private class firebase_async extends AsyncTask<String, Void, Void> {
@@ -62,12 +66,9 @@ public class Login extends Activity{
 
             final String entered_user = params[0];
             final String entered_pass = params[1];
-
-            final Firebase ref = new Firebase(firebase_Url);
             final Object lock = new Object();
 
-
-            ref.addValueEventListener(new ValueEventListener() {
+            validUserListener = ref.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
 
@@ -83,8 +84,15 @@ public class Login extends Activity{
                                 int session_val = Integer.parseInt(existUser.get(session_child).toString());
 
                                 if (entered_pass.equals(actual_pass)) {
-                                    if (session_val == 0)
+                                    if (session_val == 0) {
                                         login_status = "-1";
+
+                                        /*if difference b/w curr timestamp and stored timestamp
+                                        is greater than 15 minutes, allow log-in by setting session bit*/
+
+
+
+                                    }
 
                                     else {
                                         login_status = "1";
@@ -149,16 +157,19 @@ public class Login extends Activity{
 
                         Intent launchUser = new Intent(Login.this, UserView.class);
                         startActivity(launchUser);
+                        //Remove listener as it is not required anymore. Also pop off the current activity
+                        ref.removeEventListener(validUserListener);
+                        finish();
 
                     } else if (login_status.equals("-1")) {
-                        Toast.makeText(getApplicationContext(), "Maximum Login Limit Reached. Try Again Later", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "Maximum Login Limit Reached", Toast.LENGTH_SHORT).show();
                         etPass.setText("");
 
                     } else if (login_status.equals("0")) {
                         Toast.makeText(getApplicationContext(), "Password/User combination doesn't match", Toast.LENGTH_SHORT).show();
                         etPass.setText("");
                     } else
-                        Toast.makeText(getApplicationContext(), "Please Report the issue", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "No internet connection. Try Again Later", Toast.LENGTH_SHORT).show();
 
 
                 }
@@ -168,6 +179,54 @@ public class Login extends Activity{
         //end firebase_async_class
     }
 
+    @Override
+    public void onBackPressed() {
+        new AlertDialog.Builder(this)
+                .setMessage("Are you sure you want to exit?")
+                .setCancelable(false)
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        ref.getRoot().child(".info/connected").removeEventListener(mConnectedListener);
+                        Login.this.finish();
+                    }
+                })
+                .setNegativeButton("No", null)
+                .show();
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        System.out.println("I am in start ");
+        // Finally, a little indication of connection status
+        mConnectedListener = ref.getRoot().child(".info/connected").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                boolean connected = (Boolean) dataSnapshot.getValue();
+                if (connected) {
+
+                    StaticUserMap.getInstance().setConnectedStatus(true);
+                    System.out.println("set connected");
+                    Toast.makeText(Login.this, "Connected to Firebase", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    StaticUserMap.getInstance().setConnectedStatus(false);
+                    System.out.println("set disconnected");
+                    Toast.makeText(Login.this, "Disconnected from Firebase", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
+            }
+        });
+    }
+
+    @Override
+    public void onStop() {
+        System.out.println("I am in stop ");
+        super.onStop();
+    }
 
     @Override
     public void onBackPressed() {
@@ -194,6 +253,7 @@ public class Login extends Activity{
         entered_pass     = " ";
 
         Firebase.setAndroidContext(this);
+        ref = new Firebase(firebase_Url);
 
         btnSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -205,10 +265,16 @@ public class Login extends Activity{
                 System.out.println("Entered id: " + entered_user);
                 System.out.println("Entered Pass: " + entered_pass);
 
-                //Let the main UI run independently of the async listener
-                firebase_async authTask = new firebase_async(Login.this);
-                authTask.execute(entered_user,entered_pass);
+                //only if connected
+                if (StaticUserMap.getInstance().getConnectedStatus()) {
+                    //Let the main UI run independently of the async listener
+                    firebase_async authTask = new firebase_async(Login.this);
+                    authTask.execute(entered_user, entered_pass);
+                }
 
+                else{
+                    Toast.makeText(Login.this, "No internet connection.", Toast.LENGTH_SHORT).show();
+                }
                 //in this case the main UI does practically nothing
                 //but the catch is that it's not waiting for anyone. Fully responsive
                 System.out.println("Back in UI Thread: " + Thread.currentThread());
