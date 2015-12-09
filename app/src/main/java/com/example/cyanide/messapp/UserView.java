@@ -99,8 +99,6 @@ public class UserView extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_view);
 
-        Intent intent = getIntent();
-
         mNavigationDrawerFragment = (NavigationDrawerFragment)
                 getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
         mTitle = getString(R.string.title_section1);
@@ -123,7 +121,6 @@ public class UserView extends AppCompatActivity
                         .replace(R.id.container, new home())
                         .commit();
                 mTitle = getString(R.string.title_section1);
-
                 break;
 
             case 1:
@@ -144,7 +141,6 @@ public class UserView extends AppCompatActivity
                 fragmentManager.beginTransaction()
                         .replace(R.id.container, new UserProfile());
                 mTitle = getString(R.string.title_section4);
-
                 break;
 
             case 4:

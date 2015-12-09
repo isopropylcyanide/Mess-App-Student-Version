@@ -160,12 +160,13 @@ public class Login extends Activity{
 
                         existUser.put(session_child, "0");
                         existUser.put(password_child, actual_pass);
-                        existUser.put(last_login_child,new Date().toString());
+                        existUser.put(last_login_child, new Date().toString());
                         updated_ref.updateChildren(existUser);
 
                         user_args.put("EXTRA_FireBase_Node_Ref", database_Url + updated_ref.getPath().toString());
                         user_args.put("EXTRA_Node_Session_Field", session_child);
                         user_args.put("EXTRA_Node_Password_Field", password_child);
+                        user_args.put("EXTRA_Node_Last_Log_Field", last_login_child);
 
                         Toast.makeText(getApplicationContext(), "You are successfully logged in", Toast.LENGTH_SHORT).show();
                         StaticUserMap.getInstance().setUserMap(existUser);
@@ -173,6 +174,7 @@ public class Login extends Activity{
 
                         Intent launchUser = new Intent(Login.this, UserView.class);
                         startActivity(launchUser);
+
                         //Remove listener as it is not required anymore. Also pop off the current activity
                         ref.removeEventListener(validUserListener);
                         finish();
