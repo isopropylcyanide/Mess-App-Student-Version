@@ -40,9 +40,7 @@ public class home extends Fragment {
 
         String []arr = last_log_date.split(" ");
         String to_display = "";
-        for(int a =0; a<4; a++){
-            to_display += arr[a] + " ";
-        }
+        for(int a =0; a<4; a++){to_display += arr[a] + " ";}
         lastUserUpdate.setText(to_display);
         return homeview;
     }

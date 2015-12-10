@@ -7,6 +7,7 @@ public class StaticUserMap {
     private Map<String, Object> userStaticMap;
     private Map<String, Object> UserViewExtras;
     private boolean netConnected;
+    protected String _userName;
 
 
     public Map<String, Object> getUserViewExtras() {

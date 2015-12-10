@@ -24,7 +24,7 @@
             android:layout_height="wrap_content"
             android:text="Last updated:"
             android:layout_marginTop="10sp"
-            android:textColor="#245692"
+            android:textColor="#010409"
             android:textSize="20sp"
             android:layout_marginRight="10sp" />
 
@@ -34,24 +34,11 @@
             android:text="21/10/15"
             android:inputType="date"
             android:layout_marginTop="10sp"
-            android:textColor="#48924e"
+            android:textColor="#1c8226"
             android:textSize="20sp"
             android:id="@+id/lastUserUpdate"
             android:layout_marginRight="10sp"
             android:enabled="true" />
-
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_centerVertical="true"
-        android:layout_below="@+id/linearLayout1"
-        android:layout_centerInParent="true"
-        android:id="@+id/linearLayout"
-
-        android:layout_alignParentTop="true">
-
 
     </LinearLayout>
 

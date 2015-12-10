@@ -15,6 +15,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -31,7 +32,7 @@ import java.util.Map;
 import java.util.HashMap;
 
 
-public class Login extends Activity{
+public class Login extends AppCompatActivity{
 
     private Button btnSignIn;
     private EditText etUserName, etPass;
@@ -171,6 +172,7 @@ public class Login extends Activity{
                         Toast.makeText(getApplicationContext(), "You are successfully logged in", Toast.LENGTH_SHORT).show();
                         StaticUserMap.getInstance().setUserMap(existUser);
                         StaticUserMap.getInstance().setUserViewExtras(user_args);
+                        StaticUserMap.getInstance()._userName = entered_user;
 
                         Intent launchUser = new Intent(Login.this, UserView.class);
                         startActivity(launchUser);
@@ -255,16 +257,16 @@ public class Login extends Activity{
         etPass = (EditText) findViewById(R.id.etPass);
 
 
-        user_login_table = "login_data";
-        password_child   = "password";
-        session_child    = "session_valid";
-        last_login_child = "last_login";
-        database_Url     = "https://sweltering-heat-4362.firebaseio.com/";
+        user_login_table = Constants.USER_LOGIN_TABLE;
+        password_child   = Constants.PASSWORD_CHILD;
+        session_child    = Constants.SESSION_CHILD;
+        last_login_child = Constants.LAST_LOGIN_CHILD;
+        database_Url     = Constants.DATABASE_URL;
         firebase_Url     = database_Url + user_login_table;
+        session_timeout  = Constants.SESSION_TIMEOUT;
+        format           = new SimpleDateFormat(Constants.DATE_FORMAT);
         entered_user     = " ";
         entered_pass     = " ";
-        session_timeout  = 15 * 60;  //15 min seconds
-        format           = new SimpleDateFormat("EEE MMM dd hh:mm:ss zzz yyyy");
 
         Firebase.setAndroidContext(this);
         ref = new Firebase(firebase_Url);
