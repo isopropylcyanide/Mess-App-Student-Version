@@ -256,6 +256,8 @@ public class Login extends AppCompatActivity{
         etUserName = (EditText) findViewById(R.id.etUserName);
         etPass = (EditText) findViewById(R.id.etPass);
 
+        //To remove infidelity warnings for API below 14
+        this.getCurrentFocus().setLayerType(View.LAYER_TYPE_SOFTWARE, null);
 
         user_login_table = Constants.USER_LOGIN_TABLE;
         password_child   = Constants.PASSWORD_CHILD;

@@ -18,6 +18,7 @@ public class UserProfile extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         homeview = inflater.inflate(R.layout.user_profile, container, false);
 
+
         return homeview;
     }
 }
