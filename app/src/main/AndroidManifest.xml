@@ -12,24 +12,32 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme">
+
         <activity
             android:name="com.example.cyanide.messapp.Login"
             android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar"
             android:screenOrientation="portrait">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+                <category android:name="android.intent.category.LAUNCHER" /></intent-filter>
         </activity>
+
         <activity
             android:name="com.example.cyanide.messapp.UserView"
             android:label="@string/title_activity_user_view"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait">
+
+        </activity>
+
         <activity
             android:name="com.example.cyanide.messapp.Track"
             android:label="@string/title_activity_track"
-            android:theme="@style/Theme.AppCompat.Dialog"></activity>
+            android:theme="@style/Theme.AppCompat.Dialog">
+
+        </activity>
     </application>
 
 </manifest>

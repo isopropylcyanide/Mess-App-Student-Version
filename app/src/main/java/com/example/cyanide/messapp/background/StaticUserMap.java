@@ -1,5 +1,7 @@
 package com.example.cyanide.messapp.background;
 
+import android.view.View;
+
 import java.util.Map;
 
 public class StaticUserMap {
@@ -8,7 +10,10 @@ public class StaticUserMap {
     private static Map<String, Object> UserViewExtras;
     private static boolean netConnected;
     public static String _userName;
+    private View currentView;
 
+    public View getCurrentView(){return currentView;}
+    public void setCurrentView(View v){this.currentView = v;}
 
     public Map<String, Object> getUserViewExtras() {
         return UserViewExtras;

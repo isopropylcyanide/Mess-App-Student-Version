@@ -23,7 +23,7 @@ import java.util.logging.SimpleFormatter;
 /**
  * Created by cyanide on 12/9/15.
  */
-public class home extends Fragment {
+public class Home extends Fragment {
     View homeview;
     private TextView lastUserUpdate;
     private Map<String, Object> userChange;

@@ -16,9 +16,14 @@ public class UserProfile extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        homeview = inflater.inflate(R.layout.user_profile, container, false);
-
+        homeview = inflater.inflate(R.layout.diet_tracker, container, false);
 
         return homeview;
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        System.out.println("in onActivity");
+        super.onActivityCreated(savedInstanceState);
     }
 }

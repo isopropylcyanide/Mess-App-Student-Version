@@ -118,7 +118,7 @@ public class UserView extends AppCompatActivity
 
             case 0:
                 fragmentManager.beginTransaction()
-                        .replace(R.id.container, new home())
+                        .replace(R.id.container, new Home())
                         .commit();
                 mTitle = getString(R.string.title_section1);
                 break;
@@ -139,7 +139,8 @@ public class UserView extends AppCompatActivity
 
             case 3:
                 fragmentManager.beginTransaction()
-                        .replace(R.id.container, new UserProfile());
+                        .replace(R.id.container, new UserProfile())
+                        .commit();
                 mTitle = getString(R.string.title_section4);
                 break;
 

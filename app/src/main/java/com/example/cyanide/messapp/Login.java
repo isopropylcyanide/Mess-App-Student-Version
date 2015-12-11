@@ -16,14 +16,15 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.Window;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import android.os.Handler;
 
@@ -49,7 +50,7 @@ public class Login extends AppCompatActivity{
     private ValueEventListener mConnectedListener, validUserListener;
     private long session_timeout;
     private SimpleDateFormat format;
-
+    private CoordinatorLayout coordinatorLayout;
 
     private class firebase_async extends AsyncTask<String, Void, Void> {
         //An Async class to deal with the synchronisation of listener
@@ -151,6 +152,7 @@ public class Login extends AppCompatActivity{
 
             //Show the log in progress_bar for at least a few milliseconds
             Handler handler = new Handler();
+
             handler.postDelayed(new Runnable() {
                 public void run() {
                     pd.dismiss();
@@ -171,7 +173,6 @@ public class Login extends AppCompatActivity{
                         user_args.put("EXTRA_Node_Password_Field", password_child);
                         user_args.put("EXTRA_Node_Last_Log_Field", last_login_child);
 
-                        Toast.makeText(getApplicationContext(), "You are successfully logged in", Toast.LENGTH_SHORT).show();
                         StaticUserMap.getInstance().setUserMap(existUser);
                         StaticUserMap.getInstance().setUserViewExtras(user_args);
                         StaticUserMap.getInstance()._userName = entered_user;
@@ -184,14 +185,14 @@ public class Login extends AppCompatActivity{
                         finish();
 
                     } else if (login_status.equals("-1")) {
-                        Toast.makeText(getApplicationContext(), "Maximum Login Limit Reached", Toast.LENGTH_SHORT).show();
+                        Snackbar.make(coordinatorLayout, "Maximum Login Limit Reached", Snackbar.LENGTH_SHORT).show();
                         etPass.setText("");
 
                     } else if (login_status.equals("0")) {
-                        Toast.makeText(getApplicationContext(), "Password/User combination doesn't match", Toast.LENGTH_SHORT).show();
+                        Snackbar.make(coordinatorLayout, "Password/User combination doesn't match", Snackbar.LENGTH_SHORT).show();
                         etPass.setText("");
                     } else
-                        Toast.makeText(getApplicationContext(), "No internet connection. Try Again Later", Toast.LENGTH_SHORT).show();
+                        Snackbar.make(coordinatorLayout, "No internet connection. Try Again Later", Snackbar.LENGTH_SHORT).show();
 
 
                 }
@@ -220,6 +221,7 @@ public class Login extends AppCompatActivity{
     public void onStart() {
         super.onStart();
         // Finally, a little indication of connection status
+
         mConnectedListener = ref.getRoot().child(".info/connected").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -228,12 +230,12 @@ public class Login extends AppCompatActivity{
 
                     StaticUserMap.getInstance().setConnectedStatus(true);
                     System.out.println("set connected");
-                    Toast.makeText(Login.this, "Connected to Firebase", Toast.LENGTH_SHORT).show();
+                    Snackbar.make(coordinatorLayout,"Connected to Firebase", Snackbar.LENGTH_SHORT).show();
                 }
                 else {
                     StaticUserMap.getInstance().setConnectedStatus(false);
                     System.out.println("set disconnected");
-                    Toast.makeText(Login.this, "Disconnected from Firebase", Toast.LENGTH_SHORT).show();
+                    Snackbar.make(coordinatorLayout, "Disconnected from Firebase", Snackbar.LENGTH_SHORT).show();
                 }
             }
 
@@ -244,20 +246,19 @@ public class Login extends AppCompatActivity{
     }
 
     @Override
-    public void onStop() {
-        super.onStop();
+    protected void onDestroy() {
+        super.onDestroy();
+        ref.getRoot().child(".info/connected").removeEventListener(mConnectedListener);
     }
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        btnSignIn = (Button) findViewById(R.id.btnSingIn);
+        btnSignIn = (Button) findViewById(R.id.btnSignIn);
         etUserName = (EditText) findViewById(R.id.etUserName);
         etPass = (EditText) findViewById(R.id.etPass);
-
+        coordinatorLayout = (CoordinatorLayout)findViewById(R.id.coordinateLayout);
 
         user_login_table = Constants.USER_LOGIN_TABLE;
         password_child   = Constants.PASSWORD_CHILD;
@@ -285,17 +286,15 @@ public class Login extends AppCompatActivity{
 
                 //only if connected
                 if (StaticUserMap.getInstance().getConnectedStatus()) {
+
                     //Let the main UI run independently of the async listener
                     firebase_async authTask = new firebase_async(Login.this);
                     authTask.execute(entered_user, entered_pass);
                 }
 
-                else{
-                    Toast.makeText(Login.this, "No internet connection.", Toast.LENGTH_SHORT).show();
-                }
+                else Snackbar.make(coordinatorLayout, "No internet connection", Snackbar.LENGTH_SHORT).show();
                 //in this case the main UI does practically nothing
                 //but the catch is that it's not waiting for anyone. Fully responsive
-                System.out.println("Back in UI Thread: " + Thread.currentThread());
             }
         });
     }
