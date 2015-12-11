@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.example.cyanide.messapp.background.StaticUserMap;
 import com.example.cyanide.messpp.R;
 
 import org.w3c.dom.Text;

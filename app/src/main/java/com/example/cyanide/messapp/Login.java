@@ -1,13 +1,14 @@
 package com.example.cyanide.messapp;
 
 
+import com.example.cyanide.messapp.background.Constants;
+import com.example.cyanide.messapp.background.StaticUserMap;
 import com.example.cyanide.messpp.R;
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.firebase.client.ValueEventListener;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -19,6 +20,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -256,8 +258,6 @@ public class Login extends AppCompatActivity{
         etUserName = (EditText) findViewById(R.id.etUserName);
         etPass = (EditText) findViewById(R.id.etPass);
 
-        //To remove infidelity warnings for API below 14
-        this.getCurrentFocus().setLayerType(View.LAYER_TYPE_SOFTWARE, null);
 
         user_login_table = Constants.USER_LOGIN_TABLE;
         password_child   = Constants.PASSWORD_CHILD;

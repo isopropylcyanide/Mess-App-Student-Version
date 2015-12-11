@@ -1,13 +1,13 @@
-package com.example.cyanide.messapp;
+package com.example.cyanide.messapp.background;
 
 import java.util.Map;
 
 public class StaticUserMap {
 
-    private Map<String, Object> userStaticMap;
-    private Map<String, Object> UserViewExtras;
-    private boolean netConnected;
-    protected String _userName;
+    private static Map<String, Object> userStaticMap;
+    private static Map<String, Object> UserViewExtras;
+    private static boolean netConnected;
+    public static String _userName;
 
 
     public Map<String, Object> getUserViewExtras() {

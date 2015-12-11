@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.cyanide.messapp.background.StaticUserMap;
 import com.example.cyanide.messpp.R;
 import com.firebase.client.Firebase;
 import java.util.Map;

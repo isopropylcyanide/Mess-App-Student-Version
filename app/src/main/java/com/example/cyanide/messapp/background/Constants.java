@@ -1,4 +1,4 @@
-package com.example.cyanide.messapp;
+package com.example.cyanide.messapp.background;
 
 
 public class Constants {

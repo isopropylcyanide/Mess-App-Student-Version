@@ -14,7 +14,7 @@ import android.view.MenuItem;
 import android.support.v4.widget.DrawerLayout;
 import android.os.Handler;
 import android.widget.Toast;
-
+import com.example.cyanide.messapp.background.StaticUserMap;
 import com.example.cyanide.messpp.R;
 import com.firebase.client.Firebase;
 
