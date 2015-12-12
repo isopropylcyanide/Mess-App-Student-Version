@@ -18,7 +18,7 @@
         <item name="android:shadowRadius">1</item>
     </style>
 
-    <string name="title_activity_user_view">Messpp</string>
+    <string name="title_activity_user_view">Mess App</string>
 
     <string name="title_section1">My Home</string>
     <string name="title_section2">Diet Tracker</string>
@@ -32,10 +32,8 @@
 
 
     <string name="hello_world">Hello world!</string>
-    <string name="title_activity_track">Track</string>
+    <string name="title_activity_track"></string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
 </resources>

@@ -194,10 +194,8 @@ public class Login extends AppCompatActivity{
                     } else
                         Snackbar.make(coordinatorLayout, "No internet connection. Try Again Later", Snackbar.LENGTH_SHORT).show();
 
-
                 }
             }, 500);  // 500 milliseconds
-
         }
         //end firebase_async_class
     }

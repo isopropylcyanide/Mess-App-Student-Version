@@ -5,6 +5,7 @@ public class Constants {
 
     public static final String DATABASE_URL = "https://sweltering-heat-4362.firebaseio.com/";
     public static final String USER_LOGIN_TABLE = "login_data";
+    public static final String USER_PROFILE_TABLE = "user_student_data";
     public static final String PASSWORD_CHILD   = "password";
     public static final String SESSION_CHILD    = "session_valid";
     public static final String LAST_LOGIN_CHILD = "last_login";

@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.FragmentManager;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.support.v4.widget.DrawerLayout;
@@ -23,17 +24,10 @@ import java.util.Map;
 public class UserView extends AppCompatActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks {
 
-    /**
-     * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
-     */
     private NavigationDrawerFragment mNavigationDrawerFragment;
-
-    /**
-     * Used to store the last screen title. For use in {@link #restoreActionBar()}.
-     */
     private CharSequence mTitle;
-    private class Sign_out_async extends AsyncTask<Void, Void, Void> {
 
+    private class Sign_out_async extends AsyncTask<Void, Void, Void> {
         //An async class to deal with signing user out
         private ProgressDialog pd;
         private Context context;
@@ -57,7 +51,7 @@ public class UserView extends AppCompatActivity
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
 
-            //Display progressDialog for at least 3 seconds
+            //Display progressDialog for at least a second
             Handler handler = new Handler();
             handler.postDelayed(new Runnable() {
                 public void run() {

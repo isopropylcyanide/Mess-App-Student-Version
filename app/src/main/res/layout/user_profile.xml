@@ -1,6 +1,307 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#5c6bc0">
 
-</LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="30sp"
+        android:layout_marginTop="30sp"
+        android:background="#5c6bc0"
+        android:weightSum="1"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true">
+
+        <TextView
+            android:layout_width="100sp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:text="Name"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:gravity="center_horizontal"
+            android:textColor="#ffffff"
+            android:layout_weight="0.35" />
+
+        <TextView
+            android:id="@+id/Prof_Name"
+            android:layout_width="180sp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_marginLeft="10sp"
+            android:gravity="center_horizontal"
+            android:textColor="#ffffff"
+            android:layout_weight="0.35"
+            android:background="#80b0e0" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="30sp"
+        android:layout_marginTop="80sp"
+        android:background="#5c6bc0"
+        android:weightSum="1"
+        android:layout_alignParentStart="false"
+        android:layout_alignParentEnd="false">
+
+        <TextView
+            android:layout_width="100sp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:text="Branch"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:gravity="center_horizontal"
+            android:textColor="#ffffff"
+            android:layout_weight="0.35" />
+
+        <TextView
+            android:id="@+id/Prof_Branch"
+            android:layout_width="180sp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_marginLeft="10sp"
+            android:gravity="center_horizontal"
+            android:textColor="#ffffff"
+            android:layout_weight="0.35"
+            android:background="#80b0e0" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="30sp"
+        android:layout_marginTop="230sp"
+        android:background="#5c6bc0"
+        android:weightSum="1" >
+
+        <TextView
+            android:layout_width="100sp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:text="Email"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:gravity="center_horizontal"
+            android:textColor="#ffffff"
+            android:layout_weight="0.35" />
+
+        <TextView
+            android:id="@+id/Prof_Email"
+            android:layout_width="180sp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_marginLeft="10sp"
+            android:gravity="center_horizontal"
+            android:textColor="#ffffff"
+            android:layout_weight="0.35"
+            android:background="#80b0e0" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="30sp"
+        android:layout_marginTop="130sp"
+        android:background="#5c6bc0"
+        android:weightSum="1" >
+
+        <TextView
+            android:layout_width="100sp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:text="Room No"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:gravity="center_horizontal"
+            android:textColor="#ffffff"
+            android:layout_weight="0.35" />
+
+        <TextView
+            android:id="@+id/Prof_Room"
+            android:layout_width="180sp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_marginLeft="10sp"
+            android:gravity="center_horizontal"
+            android:textColor="#ffffff"
+            android:layout_weight="0.35"
+            android:background="#80b0e0" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="30sp"
+        android:layout_marginTop="180sp"
+        android:background="#5c6bc0"
+        android:weightSum="1" >
+
+        <TextView
+            android:layout_width="100sp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:text="Mobile"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:gravity="center_horizontal"
+            android:textColor="#ffffff"
+            android:layout_weight="0.35" />
+
+        <TextView
+            android:id="@+id/Prof_Mobile"
+            android:layout_width="180sp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_marginLeft="10sp"
+            android:gravity="center_horizontal"
+            android:textColor="#ffffff"
+            android:layout_weight="0.35"
+            android:background="#80b0e0" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="30sp"
+        android:layout_marginTop="330sp"
+        android:background="#5c6bc0"
+        android:weightSum="1" >
+
+        <TextView
+            android:layout_width="100sp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:text="Father&apos;s Name"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:gravity="center_horizontal"
+            android:textColor="#ffffff"
+            android:layout_weight="0.35" />
+
+        <TextView
+            android:id="@+id/Prof_Father"
+            android:layout_width="180sp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_marginLeft="10sp"
+            android:gravity="center_horizontal"
+            android:textColor="#ffffff"
+            android:layout_weight="0.35"
+            android:background="#80b0e0" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="30sp"
+        android:layout_marginTop="280sp"
+        android:background="#5c6bc0"
+        android:weightSum="1" >
+
+        <TextView
+            android:layout_width="100sp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:text="Blood Group"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:gravity="center_horizontal"
+            android:textColor="#ffffff"
+            android:layout_weight="0.35" />
+
+        <TextView
+            android:id="@+id/Prof_Blood"
+            android:layout_width="180sp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_marginLeft="10sp"
+            android:gravity="center_horizontal"
+            android:textColor="#ffffff"
+            android:layout_weight="0.35"
+            android:background="#80b0e0" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="30sp"
+        android:layout_marginTop="380sp"
+        android:background="#5c6bc0"
+        android:weightSum="1" >
+
+        <TextView
+            android:layout_width="100sp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:text="Father&apos;s Mobile"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:gravity="center_horizontal"
+            android:textColor="#ffffff"
+            android:layout_weight="0.35" />
+
+        <TextView
+            android:id="@+id/Prof_Father_Mobile"
+            android:layout_width="180sp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_marginLeft="10sp"
+            android:gravity="center_horizontal"
+            android:textColor="#ffffff"
+            android:layout_weight="0.35"
+            android:background="#80b0e0" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="60sp"
+        android:layout_marginTop="430sp"
+        android:background="#5c6bc0"
+        android:weightSum="1" >
+
+        <TextView
+            android:layout_width="100sp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:text="Last Updated"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:gravity="center_horizontal"
+            android:textColor="#ffffff"
+            android:layout_weight="0.35" />
+
+        <TextView
+            android:id="@+id/Prof_Last_Update"
+            android:layout_width="180sp"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_marginLeft="10sp"
+            android:gravity="center_horizontal"
+            android:textColor="#ffffff"
+            android:layout_weight="0.35"
+            android:background="#80b0e0" />
+    </LinearLayout>
+</RelativeLayout>

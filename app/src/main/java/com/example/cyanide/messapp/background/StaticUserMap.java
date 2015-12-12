@@ -1,7 +1,5 @@
 package com.example.cyanide.messapp.background;
 
-import android.view.View;
-
 import java.util.Map;
 
 public class StaticUserMap {
