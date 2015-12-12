@@ -245,11 +245,7 @@ public class Login extends AppCompatActivity{
         });
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        ref.getRoot().child(".info/connected").removeEventListener(mConnectedListener);
-    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
