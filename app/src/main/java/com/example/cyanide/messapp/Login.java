@@ -22,7 +22,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -161,20 +160,13 @@ public class Login extends AppCompatActivity{
                         //Reset the session variable
                         Firebase updated_ref = new Firebase(firebase_Url).child(entered_user);
                         Map<String, Object> existUser = new HashMap<String, Object>();
-                        Map<String, Object> user_args = new HashMap<String, Object>();
 
                         existUser.put(session_child, "0");
                         existUser.put(password_child, actual_pass);
                         existUser.put(last_login_child, new Date().toString());
                         updated_ref.updateChildren(existUser);
 
-                        user_args.put("EXTRA_FireBase_Node_Ref", database_Url + updated_ref.getPath().toString());
-                        user_args.put("EXTRA_Node_Session_Field", session_child);
-                        user_args.put("EXTRA_Node_Password_Field", password_child);
-                        user_args.put("EXTRA_Node_Last_Log_Field", last_login_child);
-
                         StaticUserMap.getInstance().setUserMap(existUser);
-                        StaticUserMap.getInstance().setUserViewExtras(user_args);
                         StaticUserMap.getInstance()._userName = entered_user;
 
                         Intent launchUser = new Intent(Login.this, UserView.class);
@@ -195,7 +187,7 @@ public class Login extends AppCompatActivity{
                         Snackbar.make(coordinatorLayout, "No internet connection. Try Again Later", Snackbar.LENGTH_SHORT).show();
 
                 }
-            }, 500);  // 500 milliseconds
+            }, 100);  // 100 milliseconds
         }
         //end firebase_async_class
     }
@@ -228,12 +220,12 @@ public class Login extends AppCompatActivity{
 
                     StaticUserMap.getInstance().setConnectedStatus(true);
                     System.out.println("set connected");
-                    Snackbar.make(coordinatorLayout,"Connected to Firebase", Snackbar.LENGTH_SHORT).show();
+                    Snackbar.make(coordinatorLayout,"Connected", Snackbar.LENGTH_SHORT).show();
                 }
                 else {
                     StaticUserMap.getInstance().setConnectedStatus(false);
                     System.out.println("set disconnected");
-                    Snackbar.make(coordinatorLayout, "Disconnected from Firebase", Snackbar.LENGTH_SHORT).show();
+                    Snackbar.make(coordinatorLayout, "Disconnected", Snackbar.LENGTH_SHORT).show();
                 }
             }
 

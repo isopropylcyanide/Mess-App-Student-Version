@@ -12,6 +12,10 @@ import android.widget.TextView;
 
 import com.example.cyanide.messpp.R;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.GregorianCalendar;
+
 public class Track extends AppCompatActivity {
 
     private int year, dayOfMonth, month;
@@ -22,13 +26,17 @@ public class Track extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_track);
 
         Intent intent = getIntent();
         year = intent.getIntExtra("year", 0);
         month = intent.getIntExtra("month", 0);
-        dayOfMonth = intent.getIntExtra("year", 0);
+        dayOfMonth = intent.getIntExtra("dayOfMonth", 0);
+
         current = this.findViewById(android.R.id.content);
+        String [] date = new GregorianCalendar(year, month, dayOfMonth).getTime().toString().split(" ");
+        String to_display = date[0]+ " "+ date[1]+ " "+ date[2];
+        setTitle(to_display);
+        setContentView(R.layout.activity_track);
 
         guestLabel = (TextView)findViewById(R.id.guest_label);
         extrasLabel = (TextView)findViewById(R.id.extras_label);

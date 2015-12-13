@@ -34,6 +34,12 @@
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_track"></string>
 
-
-
+    <!--For spinner mess off-->
+    <string-array name="mess_off_meals">
+        <item>Breakfast</item>
+        <item>Lunch</item>
+        <item>Dinner</item>
+    </string-array>
+    
+    <string name="mess_off_meal_prompt">Choose Meal</string>
 </resources>

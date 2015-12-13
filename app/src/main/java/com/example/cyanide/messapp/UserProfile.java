@@ -30,23 +30,17 @@ public class UserProfile extends Fragment {
     private class Extract_data_async extends AsyncTask<Void, Void, Void> {
 
         private Firebase ref;
-        private Map<String, Object> userChange,user_args;
         private String node_url;
         private String user_name;
 
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
+            //Get reference to the table
             user_name = StaticUserMap.getInstance()._userName;
-            node_url = Constants.DATABASE_URL + Constants.USER_PROFILE_TABLE + '/' + user_name + '/';
+            node_url = Constants.DATABASE_URL + Constants.USER_PROFILE_TABLE +  user_name;
             ref = new Firebase(node_url);
         }
-
-        @Override
-        protected void onPostExecute(Void aVoid) {
-            super.onPostExecute(aVoid);
-        }
-
 
         @Override
         protected Void doInBackground(Void... params) {
@@ -55,6 +49,7 @@ public class UserProfile extends Fragment {
 
             ref.addListenerForSingleValueEvent(new ValueEventListener() {
                 TextView text_set = null;
+                //determines which textfield will be updated given a key
 
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
@@ -75,7 +70,6 @@ public class UserProfile extends Fragment {
                         lock.notifyAll();
                     }
                 }
-
                 @Override
                 public void onCancelled(FirebaseError firebaseError) {
                 }
@@ -113,8 +107,6 @@ public class UserProfile extends Fragment {
             Toast.makeText(getActivity().getApplicationContext(), "Internet Disconnected. Try Again", Toast.LENGTH_SHORT).show();
 
         else new Extract_data_async().execute();
-
-
         return homeview;
     }
 

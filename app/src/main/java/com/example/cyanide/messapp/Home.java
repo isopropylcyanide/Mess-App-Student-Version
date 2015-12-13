@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.example.cyanide.messapp.background.Constants;
 import com.example.cyanide.messapp.background.StaticUserMap;
 import com.example.cyanide.messpp.R;
 
@@ -27,7 +28,6 @@ public class Home extends Fragment {
     View homeview;
     private TextView lastUserUpdate;
     private Map<String, Object> userChange;
-    private String last_login_child;
 
     @Nullable
     @Override
@@ -35,9 +35,8 @@ public class Home extends Fragment {
         homeview = inflater.inflate(R.layout.home, container, false);
 
         userChange = StaticUserMap.getInstance().getUserMap();
-        last_login_child  = StaticUserMap.getInstance().getUserViewExtras().get("EXTRA_Node_Last_Log_Field").toString();
         lastUserUpdate  = (TextView)homeview.findViewById(R.id.lastUserUpdate);
-        String last_log_date = userChange.get(last_login_child).toString();
+        String last_log_date = userChange.get(Constants.LAST_LOGIN_CHILD).toString();
 
         String []arr = last_log_date.split(" ");
         String to_display = "";

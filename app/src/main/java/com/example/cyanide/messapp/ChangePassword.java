@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.cyanide.messapp.background.Constants;
 import com.example.cyanide.messapp.background.StaticUserMap;
 import com.example.cyanide.messpp.R;
 import com.firebase.client.Firebase;
@@ -30,9 +31,8 @@ public class ChangePassword extends Fragment {
 
     private class Password_Match_Async extends AsyncTask<Void, Void, Void>{
         private Context async_context;
-        private String firebase_change_url;
         private String password_valid;
-        private Map<String, Object> userChange,user_args;
+        private Map<String, Object> userChange;
         private Firebase ref;
         private String actual_pass;
         private ProgressDialog pd;
@@ -47,13 +47,12 @@ public class ChangePassword extends Fragment {
         protected void onPreExecute() {
             super.onPreExecute();
             userChange = StaticUserMap.getInstance().getUserMap();
-            user_args = StaticUserMap.getInstance().getUserViewExtras();
 
-            firebase_change_url = user_args.get("EXTRA_FireBase_Node_Ref").toString();
-            password_valid  = user_args.get("EXTRA_Node_Password_Field").toString();
+            String username = StaticUserMap._userName;
+            ref = new Firebase(Constants.DATABASE_URL + Constants.USER_LOGIN_TABLE + username );
+            password_valid  = Constants.PASSWORD_CHILD;
             actual_pass = userChange.get(password_valid).toString();
 
-            ref = new Firebase(firebase_change_url);
             pd.setMessage("Requesting Password Update");
             pd.setCancelable(false);
             pd.show();

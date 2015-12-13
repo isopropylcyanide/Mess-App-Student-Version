@@ -5,14 +5,8 @@ import java.util.Map;
 public class StaticUserMap {
 
     private static Map<String, Object> userStaticMap;
-    private static Map<String, Object> UserViewExtras;
     private static boolean netConnected;
     public static String _userName;
-
-    public Map<String, Object> getUserViewExtras() {
-        return UserViewExtras;
-    }
-    public void setUserViewExtras(Map<String, Object> userViewExtras) {UserViewExtras = userViewExtras; }
 
     public Map<String, Object> getUserMap(){
         return userStaticMap;
