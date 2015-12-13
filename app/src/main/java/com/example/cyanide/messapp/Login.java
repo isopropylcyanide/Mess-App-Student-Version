@@ -177,14 +177,14 @@ public class Login extends AppCompatActivity{
                         finish();
 
                     } else if (login_status.equals("-1")) {
-                        Snackbar.make(coordinatorLayout, "Maximum Login Limit Reached", Snackbar.LENGTH_SHORT).show();
+                        Snackbar.make(getWindow().getDecorView(), "Maximum Login Limit Reached", Snackbar.LENGTH_SHORT).show();
                         etPass.setText("");
 
                     } else if (login_status.equals("0")) {
-                        Snackbar.make(coordinatorLayout, "Password/User combination doesn't match", Snackbar.LENGTH_SHORT).show();
+                        Snackbar.make(getWindow().getDecorView(), "Password/User combination doesn't match", Snackbar.LENGTH_SHORT).show();
                         etPass.setText("");
                     } else
-                        Snackbar.make(coordinatorLayout, "No internet connection. Try Again Later", Snackbar.LENGTH_SHORT).show();
+                        Snackbar.make(getWindow().getDecorView(), "No internet connection. Try Again Later", Snackbar.LENGTH_SHORT).show();
 
                 }
             }, 100);  // 100 milliseconds
@@ -220,12 +220,12 @@ public class Login extends AppCompatActivity{
 
                     StaticUserMap.getInstance().setConnectedStatus(true);
                     System.out.println("set connected");
-                    Snackbar.make(coordinatorLayout,"Connected", Snackbar.LENGTH_SHORT).show();
+                    Snackbar.make(getWindow().getDecorView(),"Connected", Snackbar.LENGTH_SHORT).show();
                 }
                 else {
                     StaticUserMap.getInstance().setConnectedStatus(false);
                     System.out.println("set disconnected");
-                    Snackbar.make(coordinatorLayout, "Disconnected", Snackbar.LENGTH_SHORT).show();
+                    Snackbar.make(getWindow().getDecorView(), "Disconnected", Snackbar.LENGTH_SHORT).show();
                 }
             }
 
@@ -278,7 +278,7 @@ public class Login extends AppCompatActivity{
                     authTask.execute(entered_user, entered_pass);
                 }
 
-                else Snackbar.make(coordinatorLayout, "No internet connection", Snackbar.LENGTH_SHORT).show();
+                else Snackbar.make(v, "No internet connection", Snackbar.LENGTH_SHORT).show();
                 //in this case the main UI does practically nothing
                 //but the catch is that it's not waiting for anyone. Fully responsive
             }

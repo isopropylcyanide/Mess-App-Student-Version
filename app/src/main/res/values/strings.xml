@@ -20,7 +20,7 @@
 
     <string name="title_activity_user_view">Mess App</string>
 
-    <string name="title_section1">My Home</string>
+    <string name="title_section1">Home</string>
     <string name="title_section2">Diet Tracker</string>
     <string name="title_section3">Mess Off</string>
     <string name="title_section4">Profile</string>

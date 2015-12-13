@@ -1,11 +1,14 @@
 package com.example.cyanide.messapp;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -68,9 +71,8 @@ public class ChangePassword extends Fragment {
                 public void run() {
                     pd.dismiss();
 
-                    if(!netConnected){
-                        Toast.makeText(getActivity().getApplicationContext(), "Internet Disconnected. Try Again", Toast.LENGTH_SHORT).show();
-                    }
+                    if(!netConnected)
+                        Snackbar.make(getView(), "Connection Failed. Please Try Again Later.",Snackbar.LENGTH_SHORT).show();
 
                     else if (curr_pass.getText().toString().equals(actual_pass)){
                         String pass1 = new_pass.getText().toString();
@@ -82,19 +84,19 @@ public class ChangePassword extends Fragment {
                             ref.updateChildren(userChange);
                             StaticUserMap.getInstance().setUserMap(userChange);
 
-                            Toast.makeText(getActivity().getApplicationContext(), "Password Updated", Toast.LENGTH_SHORT).show();
+                            Snackbar.make(getView(), "Password Updated", Snackbar.LENGTH_SHORT).show();
                             curr_pass.setText("");
                             new_pass.setText("");
                             new_pass_again.setText("");
 
                         }
                         else{
-                            Toast.makeText(getActivity().getApplicationContext(), "Password do not match", Toast.LENGTH_SHORT).show();
+                            Snackbar.make(getView(), "Passwords do not match", Snackbar.LENGTH_SHORT).show();
                             new_pass_again.setText("");
                         }
                     }
                     else{
-                        Toast.makeText(getActivity().getApplicationContext(), "Current Password is incorrect", Toast.LENGTH_SHORT).show();
+                        Snackbar.make(getView(), "Current Password is incorrect", Snackbar.LENGTH_SHORT).show();
                         curr_pass.setText("");
                     }
                 }
@@ -120,8 +122,18 @@ public class ChangePassword extends Fragment {
         change_pass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Password_Match_Async password_match_async = new Password_Match_Async(ChangePassword.this.getContext());
-                password_match_async.execute();
+
+                new AlertDialog.Builder(getContext())
+                        .setMessage("Are you sure you want to change your password?")
+                        .setCancelable(false)
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                Password_Match_Async password_match_async = new Password_Match_Async(ChangePassword.this.getContext());
+                                password_match_async.execute();
+                            }
+                        })
+                        .setNegativeButton("No", null)
+                        .show();
             }
         });
 

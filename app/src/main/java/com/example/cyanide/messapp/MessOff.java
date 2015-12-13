@@ -1,6 +1,7 @@
 package com.example.cyanide.messapp;
 
 import android.app.DatePickerDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
@@ -64,13 +65,14 @@ public class MessOff extends Fragment {
         else if (meal_time.equals("Dinner")) hour = 20;
         cal.set(Calendar.HOUR_OF_DAY,hour);
         cal.set(Calendar.MINUTE,30);
-        cal.set(Calendar.SECOND,0);
-        cal.set(Calendar.MILLISECOND,0);
+        cal.set(Calendar.SECOND, 0);
+        cal.set(Calendar.MILLISECOND, 0);
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        System.out.println("I am in messoff onCreateView");
         homeview = inflater.inflate(R.layout.mess_off, container, false);
 
         fromDate = (EditText)homeview.findViewById(R.id.fromdate);
@@ -92,12 +94,6 @@ public class MessOff extends Fragment {
         fromSpinner.setSelection(0);
         toSpinner.setSelection(0);
         messStatus.setMovementMethod(new ScrollingMovementMethod());
-
-        new AlertDialog.Builder(getContext())
-                .setMessage(Constants.MESS_OFF_RULES)
-                .setCancelable(false)
-                .setPositiveButton("I understand", null)
-                .show();
 
         //Setup firebase to read at the required table. This is global to the activity
         //as the tableUrl remains constant throughout this session. But node may exist or not
@@ -299,9 +295,24 @@ public class MessOff extends Fragment {
                 }
             }
         });
-
-
-
         return homeview;
     }
+
+    @Override
+    public void onAttach(Context context) {
+        System.out.println("Damn its attached");
+        super.onAttach(context);
+        new AlertDialog.Builder(getContext())
+                .setMessage(Constants.MESS_OFF_RULES)
+                .setCancelable(false)
+                .setPositiveButton("I understand", null)
+                .show();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        ref.removeEventListener(valueEventListener);
+    }
+
 }

@@ -28,7 +28,7 @@
         <activity
             android:name="com.example.cyanide.messapp.UserView"
             android:label="@string/title_activity_user_view"
-            android:screenOrientation="portrait">
+            android:configChanges="orientation|screenSize|keyboardHidden">
 
         </activity>
 

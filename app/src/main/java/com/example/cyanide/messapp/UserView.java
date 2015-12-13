@@ -2,9 +2,11 @@ package com.example.cyanide.messapp;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 
 import android.support.v7.app.ActionBar;
@@ -67,7 +69,7 @@ public class UserView extends AppCompatActivity
                         finish();
                     }
                 }
-            }, 500);  // 500 milliseconds
+            }, 200);  // 200 milliseconds
         }
 
         @Override
@@ -97,7 +99,7 @@ public class UserView extends AppCompatActivity
                 getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
         mTitle = getString(R.string.title_section1);
 
-
+        mNavigationDrawerFragment.setRetainInstance(true);
         // Set up the drawer.
         mNavigationDrawerFragment.setUp(
                 R.id.navigation_drawer,
@@ -147,9 +149,17 @@ public class UserView extends AppCompatActivity
                 break;
 
             case 5:
-                Sign_out_async user_sign_out = new Sign_out_async(this);
-                user_sign_out.execute();
-                mTitle = getString(R.string.title_section6);
+
+                new AlertDialog.Builder(UserView.this)
+                        .setMessage("Sure to sign out?")
+                        .setCancelable(false)
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                new Sign_out_async(UserView.this).execute();
+                            }
+                        })
+                        .setNegativeButton("No", null)
+                        .show();
                 break;
         }
 
