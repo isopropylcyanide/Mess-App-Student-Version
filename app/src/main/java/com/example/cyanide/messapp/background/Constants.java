@@ -9,9 +9,9 @@ public class Constants {
     public static final String PASSWORD_CHILD   = "password";
     public static final String SESSION_CHILD    = "session_valid";
     public static final Integer SESSION_TIMEOUT  = 15 * 60;  //15 min seconds
+    public static final String LAST_LOGIN_CHILD = "last_login";
 
     public static final String USER_MESS_TABLE  = "user_mess_off/";
-    public static final String LAST_LOGIN_CHILD = "last_login";
     public static final String USER_MESS_START_DATE_KEY = "start_date";
     public static final String USER_MESS_END_DATE_KEY = "end_date";
     public static final String USER_MESS_START_MEAL_KEY = "start_meal";
@@ -35,6 +35,14 @@ public class Constants {
                                                 "\n\nMinimum notice to be provided: "+ MESS_OFF_MIN_NOTICE_DAY+" day(s)." +
             "\n\nMess Off Record can be reset upto: "+MESS_OFF_CANCEL_DAY.toString() +" day(s) before the start date in the record." +
                                                 "" ;
+
+    public static final String USER_EXTRA_TABLE = "user_extra_diet/";
+    public static final String USER_EXTRA_DATE_KEY = "extra_date";
+    public static final String USER_EXTRA_COST_KEY = "extra_cost";
+
+    public static final String USER_GUEST_TABLE = "user_guest_diet/";
+    public static final String USER_GUEST_DATE_KEY = "guest_date";
+    public static final String USER_GUEST_COUNT_KEY = "guest_count";
 
 
 }

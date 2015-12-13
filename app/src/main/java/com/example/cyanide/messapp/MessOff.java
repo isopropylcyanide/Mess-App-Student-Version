@@ -72,7 +72,6 @@ public class MessOff extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        System.out.println("I am in messoff onCreateView");
         homeview = inflater.inflate(R.layout.mess_off, container, false);
 
         fromDate = (EditText)homeview.findViewById(R.id.fromdate);
@@ -300,7 +299,6 @@ public class MessOff extends Fragment {
 
     @Override
     public void onAttach(Context context) {
-        System.out.println("Damn its attached");
         super.onAttach(context);
         new AlertDialog.Builder(getContext())
                 .setMessage(Constants.MESS_OFF_RULES)

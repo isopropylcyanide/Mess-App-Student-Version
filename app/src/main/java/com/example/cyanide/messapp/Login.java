@@ -16,7 +16,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -49,7 +48,6 @@ public class Login extends AppCompatActivity{
     private ValueEventListener mConnectedListener, validUserListener;
     private long session_timeout;
     private SimpleDateFormat format;
-    private CoordinatorLayout coordinatorLayout;
 
     private class firebase_async extends AsyncTask<String, Void, Void> {
         //An Async class to deal with the synchronisation of listener
@@ -244,7 +242,6 @@ public class Login extends AppCompatActivity{
         btnSignIn = (Button) findViewById(R.id.btnSignIn);
         etUserName = (EditText) findViewById(R.id.etUserName);
         etPass = (EditText) findViewById(R.id.etPass);
-        coordinatorLayout = (CoordinatorLayout)findViewById(R.id.coordinateLayout);
 
         user_login_table = Constants.USER_LOGIN_TABLE;
         password_child   = Constants.PASSWORD_CHILD;

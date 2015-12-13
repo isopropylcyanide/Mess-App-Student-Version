@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.provider.Settings;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -12,12 +13,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.FragmentManager;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.support.v4.widget.DrawerLayout;
 import android.os.Handler;
-import android.widget.Toast;
 
 import com.example.cyanide.messapp.background.Constants;
 import com.example.cyanide.messapp.background.StaticUserMap;
@@ -69,7 +68,7 @@ public class UserView extends AppCompatActivity
                         finish();
                     }
                 }
-            }, 200);  // 200 milliseconds
+            }, 400);  // 400 milliseconds
         }
 
         @Override
@@ -202,13 +201,24 @@ public class UserView extends AppCompatActivity
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+        switch (item.getItemId()){
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+            case R.id.action_settings:
+                return true;
+
+            case R.id.action_sys_setting:
+                startActivity(new Intent(Settings.ACTION_SETTINGS));
+                return true;
+
+            case R.id.action_mess_rules:
+                new AlertDialog.Builder(this)
+                        .setMessage(Constants.MESS_OFF_RULES)
+                        .setCancelable(false)
+                        .setPositiveButton("I understand", null)
+                        .show();
+                return true;
+
         }
-
         return super.onOptionsItemSelected(item);
     }
 
