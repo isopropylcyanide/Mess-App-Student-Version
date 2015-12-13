@@ -3,6 +3,8 @@
 
 
     <string name="action_settings">Settings</string>
+    <string name="action_mess_rules">Mess Off Rules</string>
+    <string name="action_sys_setting">System Settings</string>
 
     <style name="DefaultButtonText">
         <item name="android:layout_width">wrap_content</item>
