@@ -68,7 +68,7 @@ public class UserView extends AppCompatActivity
                         finish();
                     }
                 }
-            }, 400);  // 400 milliseconds
+            }, 400);  // w
         }
 
         @Override

@@ -18,7 +18,7 @@ public class Constants {
     public static final String USER_MESS_END_MEAL_KEY = "end_meal";
 
     public static final String DATE_FORMAT     = "EEE MMM dd hh:mm:ss zzz yyyy";
-    public static final Long DIET_RECORD_MONTHS = 3L;
+    public static final Long DIET_RECORD_MONTHS = 1L;
     public static final Long MESS_OFF_MIN_DAYS = 2L;
     public static final Long MESS_OFF_MIN_NOTICE_DAY = 1L;
     public static final Long MESS_OFF_CANCEL_DAY = 2L;
@@ -37,11 +37,11 @@ public class Constants {
                                                 "" ;
 
     public static final String USER_EXTRA_TABLE = "user_extra_diet/";
-    public static final String USER_EXTRA_DATE_KEY = "extra_date";
+    //public static final String USER_EXTRA_DATE_KEY = "extra_date";
     public static final String USER_EXTRA_COST_KEY = "extra_cost";
 
     public static final String USER_GUEST_TABLE = "user_guest_diet/";
-    public static final String USER_GUEST_DATE_KEY = "guest_date";
+    //public static final String USER_GUEST_DATE_KEY = "guest_date";
     public static final String USER_GUEST_COUNT_KEY = "guest_count";
 
 

@@ -18,6 +18,7 @@ import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.firebase.client.ValueEventListener;
 
+import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
 
@@ -63,6 +64,7 @@ public class Track extends AppCompatActivity {
         bfast_cb     = (CheckBox)findViewById(R.id.bfast_cb);
         lunch_cb     = (CheckBox)findViewById(R.id.lunch_cb);
         dinner_cb    = (CheckBox)findViewById(R.id.dinner_cb);
+
         bfast_cb.setChecked(true);
         lunch_cb.setChecked(true);
         dinner_cb.setChecked(true);
@@ -77,35 +79,19 @@ public class Track extends AppCompatActivity {
 
         //Retrieve user extras cost at the desired day
         //if name exists in the database, and if the date matches that record
+
         //then display that in the label
         extra_ref.addListenerForSingleValueEvent(new ValueEventListener() {
-            boolean entryExists = false;
-            HashMap<String, Object> existUser;
-
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
                 for (DataSnapshot ds : dataSnapshot.getChildren()) {
                     if (_username.equals(ds.getKey())) {
-                        entryExists = true;
-                        existUser = (HashMap<String, Object>) ds.getValue();
+                        ArrayList<HashMap<String, String> > test = (ArrayList<HashMap<String, String> >)ds.getValue();
+                        extrasLabel.setText(test.get(dayOfMonth).get(Constants.USER_EXTRA_COST_KEY).toString());
                         break;
                     }
                 }
-
-                if (entryExists) {
-                    String dbDate[] = existUser.get(Constants.USER_EXTRA_DATE_KEY).toString().split(" ");
-
-                    String matchYear = dbDate[5];
-                    String matchDate = dbDate[2];
-                    String matchMonth = dbDate[1];
-
-                    if (year_str.equals(matchYear) && month_str.equals(matchMonth) && date_str.equals(matchDate))
-                        extrasLabel.setText(existUser.get(Constants.USER_EXTRA_COST_KEY).toString());
-
-                    else extrasLabel.setText("None");
-                }
-                else extrasLabel.setText("Nil");
             }
 
             @Override
@@ -116,40 +102,23 @@ public class Track extends AppCompatActivity {
 
         //Retrieve guest diets at the specific date
         guest_ref.addListenerForSingleValueEvent(new ValueEventListener() {
-            boolean entryExists = false;
-            HashMap<String, Object> existUser;
 
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
                 for (DataSnapshot ds : dataSnapshot.getChildren()) {
                     if (_username.equals(ds.getKey())) {
-                        entryExists = true;
-                        existUser = (HashMap<String, Object>) ds.getValue();
+                        ArrayList<HashMap<String, String> > test = (ArrayList<HashMap<String, String> >)ds.getValue();
+                        guestLabel.setText(test.get(dayOfMonth).get(Constants.USER_GUEST_COUNT_KEY).toString());
                         break;
                     }
                 }
-
-                if (entryExists) {
-                    String dbDate[] = existUser.get(Constants.USER_GUEST_DATE_KEY).toString().split(" ");
-
-                    String matchYear = dbDate[5];
-                    String matchDate = dbDate[2];
-                    String matchMonth = dbDate[1];
-
-                    if (year_str.equals(matchYear) && month_str.equals(matchMonth) && date_str.equals(matchDate))
-                        guestLabel.setText(existUser.get(Constants.USER_GUEST_COUNT_KEY).toString());
-
-                    else guestLabel.setText("None");
-                }
-                else guestLabel.setText("Nil");
             }
 
             @Override
             public void onCancelled(FirebaseError firebaseError) {
             }
         });
-
 
         current.setOnTouchListener(new View.OnTouchListener() {
             @Override
