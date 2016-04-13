@@ -5,7 +5,6 @@ public class Constants {
 
     public static final String DATABASE_URL = "https://sweltering-heat-4362.firebaseio.com/";
     public static final String USER_LOGIN_TABLE = "login_data/";
-    public static final String USER_PROFILE_TABLE = "user_student_data/";
     public static final String PASSWORD_CHILD   = "password";
     public static final String SESSION_CHILD    = "session_valid";
     public static final Integer SESSION_TIMEOUT  = 15 * 60;  //15 min seconds
@@ -17,8 +16,30 @@ public class Constants {
     public static final String USER_MESS_START_MEAL_KEY = "start_meal";
     public static final String USER_MESS_END_MEAL_KEY = "end_meal";
 
+    //****Useful for diet tracking parts*****
+    public static final String STUDENT_DIET_BFAST = "b";
+    public static final String STUDENT_DIET_LUNCH = "l";
+    public static final String STUDENT_DIET_DINNER = "d";
+    public static final String STUDENT_DIET_EXTRAS = "extras";
+    public static final String STUDENT_DIET_GUEST = "guest";
+
+    public static final String STUDENT_DATABASE_DIET_TABLE = "roll_day_diet/";
+    //Used in diet tracker
+
+    /***** Holds the details of the user*/
+    public static final String USER_PROFILE_TABLE = "user_student_data/";
+    public static final String USER_PROFILE_ROOM = "Room No";
+    public static final String USER_PROFILE_BRANCH = "Branch";
+    public static final String USER_PROFILE_EMAIL = "Email ID";
+    public static final String USER_PROFILE_FATHER = "Father's Name";
+    public static final String USER_PROFILE_LAST_UPDATED = "Last Updated";
+    public static final String USER_PROFILE_MOBILE = "Mobile";
+    public static final String USER_PROFILE_NAME = "Name";
+    public static final String USER_PROFILE_BLOOD = "Blood Group";
+    public static final String USER_PROFILE_PARENT_MOBILE = "Parent's Mobile";
+
     public static final String DATE_FORMAT     = "EEE MMM dd hh:mm:ss zzz yyyy";
-    public static final Long DIET_RECORD_MONTHS = 1L;
+    public static final Long DIET_RECORD_MONTHS =6L;
     public static final Long MESS_OFF_MIN_DAYS = 2L;
     public static final Long MESS_OFF_MIN_NOTICE_DAY = 1L;
     public static final Long MESS_OFF_CANCEL_DAY = 2L;
@@ -35,14 +56,5 @@ public class Constants {
                                                 "\n\nMinimum notice to be provided: "+ MESS_OFF_MIN_NOTICE_DAY+" day(s)." +
             "\n\nMess Off Record can be reset upto: "+MESS_OFF_CANCEL_DAY.toString() +" day(s) before the start date in the record." +
                                                 "" ;
-
-    public static final String USER_EXTRA_TABLE = "user_extra_diet/";
-    //public static final String USER_EXTRA_DATE_KEY = "extra_date";
-    public static final String USER_EXTRA_COST_KEY = "extra_cost";
-
-    public static final String USER_GUEST_TABLE = "user_guest_diet/";
-    //public static final String USER_GUEST_DATE_KEY = "guest_date";
-    public static final String USER_GUEST_COUNT_KEY = "guest_count";
-
 
 }

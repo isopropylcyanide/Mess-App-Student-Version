@@ -174,7 +174,7 @@
         <TextView
             android:layout_width="300sp"
             android:layout_height="fill_parent"
-            android:text="Fetching Record Status"
+            android:text="No record found"
             android:id="@+id/messStatus"
             android:layout_gravity="center_horizontal"
             android:maxLines = "6"

@@ -1,17 +1,23 @@
 package com.example.cyanide.messapp.background;
 
-import java.util.Map;
-
 public class StaticUserMap {
 
-    private static Map<String, Object> userStaticMap;
     private static boolean netConnected;
-    public static String _userName;
+    public static String _roll;
+    public static String _name;
+    public static String _roomNumber;
+    public static String _branch, _mobile, _father_name;
+    public static String _parent_mobile, _last_updated, _blood, _email;
 
-    public Map<String, Object> getUserMap(){
-        return userStaticMap;
+    private static String _password;//private Data
+
+    public String get_password(){
+        return _password;
     }
-    public void setUserMap(Map<String,Object> userStaticMap){this.userStaticMap = userStaticMap;}
+
+    public void set_password(String pass){
+        _password = new String(pass);
+    }
 
     public boolean getConnectedStatus(){return netConnected;}
     public void setConnectedStatus(boolean flag){netConnected = flag;}

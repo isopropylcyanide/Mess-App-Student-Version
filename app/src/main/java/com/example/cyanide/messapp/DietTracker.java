@@ -20,18 +20,18 @@ public class DietTracker extends Fragment {
     View homeview;
     private long diet_track_interval;
     private CalendarView cal;
-    //Mark those areas as red, where the user's mess is off
+    private Firebase studentDietRef;
+    private String user_name;
+    private String node_url;
 
+    //Mark those areas as red, where the user's mess is off
     private class easy_mess_viewer extends AsyncTask<Void, Void, Void>{
-        private String node_url;
-        private String user_name;
+
 
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
             //Get reference to the table
-            user_name = StaticUserMap.getInstance()._userName;
-            node_url = Constants.DATABASE_URL + Constants.USER_PROFILE_TABLE + user_name;
 
         }
 
@@ -55,9 +55,15 @@ public class DietTracker extends Fragment {
 
         cal.setMinDate(cal.getDate() - diet_track_interval);
         cal.setMaxDate(cal.getDate());
+        user_name = StaticUserMap.getInstance()._roll;
 
         //Start marking the dates as red accordingly
          new easy_mess_viewer().execute();
+
+        //Create a reference to this student in the database and pass it on so
+        //new reference is not calculated each time a date is picked
+        studentDietRef = new Firebase(Constants.DATABASE_URL + Constants.STUDENT_DATABASE_DIET_TABLE).child(user_name);
+        node_url = studentDietRef.toString();
 
         cal.setOnDateChangeListener(new CalendarView.OnDateChangeListener(){
             public void onSelectedDayChange(CalendarView view ,int year,int month,int dayOfMonth){
@@ -66,6 +72,7 @@ public class DietTracker extends Fragment {
                 launchDateTracker.putExtra("year", year);
                 launchDateTracker.putExtra("month", month);
                 launchDateTracker.putExtra("dayOfMonth", dayOfMonth);
+                launchDateTracker.putExtra("firebaseRef", node_url); //only one connection is created during the lifetime
                 startActivity(launchDateTracker);
             }
         });

@@ -23,8 +23,6 @@ import com.example.cyanide.messapp.background.StaticUserMap;
 import com.example.cyanide.messpp.R;
 import com.firebase.client.Firebase;
 
-import java.util.Map;
-
 public class UserView extends AppCompatActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks {
 
@@ -68,22 +66,15 @@ public class UserView extends AppCompatActivity
                         finish();
                     }
                 }
-            }, 400);  // w
+            }, 400);  // wait for this period atleast
         }
 
         @Override
         protected Void doInBackground(Void... params) {
 
-            Map< String, Object> userLogOut = StaticUserMap.getInstance().getUserMap();
-
-            String username = StaticUserMap._userName;
-            Firebase update_ref = new Firebase(Constants.DATABASE_URL + Constants.USER_LOGIN_TABLE + username );
-            String session_val = Constants.SESSION_CHILD;
-
-            userLogOut.put(session_val, "1");
-            update_ref.updateChildren(userLogOut);
-            StaticUserMap.getInstance().setUserMap(userLogOut);
-
+            String username = StaticUserMap._roll;
+            Firebase update_ref = new Firebase(Constants.DATABASE_URL + Constants.USER_LOGIN_TABLE ).child(username);
+            update_ref.child(Constants.SESSION_CHILD).setValue("1");
             return null;
         }
     }

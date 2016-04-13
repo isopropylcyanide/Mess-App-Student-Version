@@ -15,13 +15,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.example.cyanide.messapp.background.Constants;
 import com.example.cyanide.messapp.background.StaticUserMap;
 import com.example.cyanide.messpp.R;
 import com.firebase.client.Firebase;
-import java.util.Map;
 
 
 public class ChangePassword extends Fragment {
@@ -34,8 +32,6 @@ public class ChangePassword extends Fragment {
 
     private class Password_Match_Async extends AsyncTask<Void, Void, Void>{
         private Context async_context;
-        private String password_valid;
-        private Map<String, Object> userChange;
         private Firebase ref;
         private String actual_pass;
         private ProgressDialog pd;
@@ -49,12 +45,10 @@ public class ChangePassword extends Fragment {
 
         protected void onPreExecute() {
             super.onPreExecute();
-            userChange = StaticUserMap.getInstance().getUserMap();
 
-            String username = StaticUserMap._userName;
-            ref = new Firebase(Constants.DATABASE_URL + Constants.USER_LOGIN_TABLE + username );
-            password_valid  = Constants.PASSWORD_CHILD;
-            actual_pass = userChange.get(password_valid).toString();
+            String username = StaticUserMap._roll;
+            ref = new Firebase(Constants.DATABASE_URL + Constants.USER_LOGIN_TABLE).child(username);
+            actual_pass = StaticUserMap.getInstance().get_password();
 
             pd.setMessage("Requesting Password Update");
             pd.setCancelable(false);
@@ -80,11 +74,10 @@ public class ChangePassword extends Fragment {
 
                         if(pass1.equals(pass2)){
                             //Firebase Update here
-                            userChange.put(password_valid, pass1);
-                            ref.updateChildren(userChange);
-                            StaticUserMap.getInstance().setUserMap(userChange);
+                            ref.child(Constants.PASSWORD_CHILD).setValue(pass1);
 
                             Snackbar.make(getView(), "Password Updated", Snackbar.LENGTH_SHORT).show();
+                            StaticUserMap.getInstance().set_password(pass1);
                             curr_pass.setText("");
                             new_pass.setText("");
                             new_pass_again.setText("");

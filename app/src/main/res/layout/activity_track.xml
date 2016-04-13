@@ -16,7 +16,7 @@
         android:orientation="vertical"
 
 
-        android:background="#b52942d0">
+        android:background="#b53a4dd7">
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -74,7 +74,7 @@
                     android:id="@+id/dinner_cb"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:enabled="false" />
+                    android:enabled="true" />
 
             </LinearLayout>
 
@@ -97,7 +97,7 @@
                     android:id="@+id/lunch_cb"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:enabled="false" />
+                    android:enabled="true" />
 
             </LinearLayout>
 
@@ -120,7 +120,7 @@
                     android:id="@+id/bfast_cb"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:enabled="false" />
+                    android:enabled="true" />
             </LinearLayout>
             <LinearLayout
                 android:layout_width="wrap_content"

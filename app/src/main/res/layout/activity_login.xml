@@ -51,7 +51,8 @@
                 android:layout_above="@+id/linearLayout2"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
-                android:layout_marginTop="15sp" />
+                android:layout_marginTop="15sp"
+                android:text="13103079" />
 
             <EditText
                 android:id="@+id/etPass"
@@ -67,7 +68,8 @@
                 android:layout_below="@+id/etUserName"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
-                android:layout_marginTop="20sp" />
+                android:layout_marginTop="20sp"
+                android:text="a" />
 
         </LinearLayout>
 

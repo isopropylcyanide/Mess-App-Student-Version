@@ -3,7 +3,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="match_parent"
     android:gravity="center_horizontal"
-    android:background="#f7f0f0">
+    android:background="#388e3c">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -14,7 +14,8 @@
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:id="@+id/calendar"
-            android:onClick="showTrack">
+            android:onClick="showTrack"
+            android:background="#cacfdc">
 
         </CalendarView>
 
